@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Theme;
 
+use App\Http\Resources\Group\GroupResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,6 +19,7 @@ class ThemeResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
+            'groups' => $this->groups
         ];
     }
 }

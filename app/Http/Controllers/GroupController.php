@@ -10,7 +10,6 @@ use App\Http\Resources\Group\SyllabusResource;
 use App\Models\Group;
 use App\Services\GroupService;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Arr;
 
 class GroupController extends Controller
 {
@@ -26,7 +25,7 @@ class GroupController extends Controller
         return GroupResource::make($group);
     }
 
-    public function showSyllabus(Group $group)
+    public function showSyllabus(Group $group):SyllabusResource
     {
         return SyllabusResource::make($group);
     }

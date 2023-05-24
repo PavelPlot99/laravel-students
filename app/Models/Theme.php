@@ -22,6 +22,6 @@ class Theme extends Model
 
     public function groups():BelongsToMany
     {
-        return $this->belongsToMany(Group::class, 'lecture', 'group_id', 'theme_id');
+        return $this->belongsToMany(Group::class, 'lectures', 'theme_id', 'group_id')->withPivot('order');
     }
 }

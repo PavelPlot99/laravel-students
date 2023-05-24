@@ -19,7 +19,7 @@ class StudentController extends Controller
         return ListStudentResource::collection($students);
     }
 
-    public function show(Student $student)
+    public function show(Student $student): StudentResource
     {
         return StudentResource::make($student);
     }
