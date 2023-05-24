@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('theme_id');
             $table->unsignedBigInteger('group_id');
+            $table->integer('order');
 
             $table->foreign('theme_id')->references('id')->on('themes')->cascadeOnDelete();
             $table->foreign('group_id')->references('id')->on('groups')->cascadeOnDelete();

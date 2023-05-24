@@ -3,6 +3,7 @@
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\LectureController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\ThemeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,8 +31,8 @@ Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
 Route::patch('/groups/{group}', [GroupController::class, 'update'])->name('groups.update');
 Route::delete('/groups/{group}', [GroupController::class, 'destroy'])->name('groups.destroy');
 
-Route::get('/lectures', [LectureController::class, 'index'])->name('lectures.index');
-Route::get('/lectures/{lecture}', [LectureController::class, 'show'])->name('lectures.show');
-Route::post('/lectures', [LectureController::class, 'store'])->name('lectures.store');
-Route::patch('/lectures/{lecture}', [LectureController::class, 'update'])->name('lectures.update');
-Route::delete('/lectures/{lecture}', [LectureController::class, 'destroy'])->name('lectures.destroy');
+Route::get('/themes', [ThemeController::class, 'index'])->name('themes.index');
+Route::get('/themes/{theme}', [ThemeController::class, 'show'])->name('themes.show');
+Route::post('/themes', [ThemeController::class, 'store'])->name('themes.store');
+Route::patch('/themes/{theme}', [ThemeController::class, 'update'])->name('themes.update');
+Route::delete('/themes/{theme}', [ThemeController::class, 'destroy'])->name('themes.destroy');

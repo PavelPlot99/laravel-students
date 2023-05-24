@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Group\GroupRequest;
+use App\Http\Requests\Group\UpdateGroupRequest;
 use App\Http\Resources\Group\GroupResource;
 use App\Http\Resources\Group\ListGroupResource;
 use App\Http\Resources\Group\SyllabusResource;
 use App\Models\Group;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Arr;
 
 class GroupController extends Controller
 {
@@ -34,16 +36,13 @@ class GroupController extends Controller
         return GroupResource::make($group);
     }
 
-    public function update(GroupRequest $request, Group $group):GroupResource
+    public function update(UpdateGroupRequest $request, Group $group):SyllabusResource
     {
-        $group->update($request->validated());
+        $data = $request->validated();
+        $group->update($data['group']);
+        $group->themes()->sync($data['themes']);
 
-        return GroupResource::make($group);
-    }
-
-    public function createOrUpdateSyllabus()
-    {
-
+        return SyllabusResource::make($group);
     }
 
     public function destroy(Group $group):GroupResource

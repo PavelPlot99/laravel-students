@@ -16,7 +16,9 @@ class SyllabusResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'lectures' => ListLectureResource::collection($this->lectures)
+            'id' => $this->id,
+            'title' => $this->title,
+            'themes' => $this->themes
         ];
     }
 }
