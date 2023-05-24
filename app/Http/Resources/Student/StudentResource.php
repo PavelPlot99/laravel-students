@@ -2,8 +2,7 @@
 
 namespace App\Http\Resources\Student;
 
-use App\Http\Resources\Group\GroupResource;
-use App\Http\Resources\Group\SyllabusResource;
+use App\Http\Resources\Group\LectureResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -21,7 +20,7 @@ class StudentResource extends JsonResource
             'name' => $this->name,
             'email' => $this->email,
             'group_id' => $this->group_id,
-            'group' => SyllabusResource::make($this->group),
+            'group' => LectureResource::make($this->group),
         ];
     }
 }

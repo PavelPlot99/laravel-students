@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Group\GroupRequest;
 use App\Http\Requests\Group\UpdateGroupRequest;
+use App\Http\Requests\Lecture\UpdateLectureRequest;
 use App\Http\Resources\Group\GroupResource;
 use App\Http\Resources\Group\ListGroupResource;
-use App\Http\Resources\Group\SyllabusResource;
+use App\Http\Resources\Group\LectureResource;
 use App\Models\Group;
+use App\Query\GroupQuery;
 use App\Services\GroupService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -25,23 +27,29 @@ class GroupController extends Controller
         return GroupResource::make($group);
     }
 
-    public function showSyllabus(Group $group):SyllabusResource
+    public function showLectures(Group $group): LectureResource
     {
-        return SyllabusResource::make($group);
+        return LectureResource::make($group);
     }
 
-    public function store(GroupRequest $request): ListGroupResource
+    public function store(GroupRequest $request, GroupQuery $groupQuery): ListGroupResource
     {
-        $group = Group::query()->create($request->validated());
+        $group = $groupQuery->store($request->get('title'));
 
         return ListGroupResource::make($group);
     }
 
-    public function update(UpdateGroupRequest $request, Group $group, GroupService $groupService): SyllabusResource
+    public function updateLecture(UpdateLectureRequest $request, Group $group, GroupService $groupService): LectureResource
     {
         $data = $request->validated();
+        return LectureResource::make($groupService->updateGroup($group, $data));
+    }
 
-        return SyllabusResource::make($groupService->updateGroup($group, $data));
+    public function update(UpdateGroupRequest $request, Group $group): JsonResource
+    {
+        $group->update($request->validated());
+
+        return ListGroupResource::make($group);
     }
 
     public function destroy(Group $group): ListGroupResource

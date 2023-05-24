@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\Group;
 
+use App\Models\Theme;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateGroupRequest extends FormRequest
 {
@@ -14,8 +16,7 @@ class UpdateGroupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'group.title' => 'max:255|unique:groups,title',
-            'themes' => 'array',
+            'title' => 'max:255|unique:groups,title',
         ];
     }
 }

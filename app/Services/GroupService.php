@@ -11,9 +11,6 @@ class GroupService
 {
     public function updateGroup($group, $data):Group
     {
-        if(isset($data['group'])){
-            $group->update($data['group']);
-        }
         if(isset($data['themes'])){
             $group->themes()->sync($data['themes']);
         }
