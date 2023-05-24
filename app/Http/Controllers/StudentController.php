@@ -14,7 +14,7 @@ class StudentController extends Controller
 {
     public function index(): JsonResource
     {
-        $students = Student::query()->with('group.lectures')->get();
+        $students = Student::query()->with('group.themes')->get();
 
         return ListStudentResource::collection($students);
     }

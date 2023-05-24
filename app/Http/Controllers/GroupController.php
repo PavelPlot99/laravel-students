@@ -8,6 +8,7 @@ use App\Http\Resources\Group\GroupResource;
 use App\Http\Resources\Group\ListGroupResource;
 use App\Http\Resources\Group\SyllabusResource;
 use App\Models\Group;
+use App\Services\GroupService;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Arr;
 
@@ -25,30 +26,29 @@ class GroupController extends Controller
         return GroupResource::make($group);
     }
 
-    public function showSyllabus(Group $group){
+    public function showSyllabus(Group $group)
+    {
         return SyllabusResource::make($group);
     }
 
-    public function store(GroupRequest $request):GroupResource
+    public function store(GroupRequest $request): ListGroupResource
     {
         $group = Group::query()->create($request->validated());
 
-        return GroupResource::make($group);
+        return ListGroupResource::make($group);
     }
 
-    public function update(UpdateGroupRequest $request, Group $group):SyllabusResource
+    public function update(UpdateGroupRequest $request, Group $group, GroupService $groupService): SyllabusResource
     {
         $data = $request->validated();
-        $group->update($data['group']);
-        $group->themes()->sync($data['themes']);
 
-        return SyllabusResource::make($group);
+        return SyllabusResource::make($groupService->updateGroup($group, $data));
     }
 
-    public function destroy(Group $group):GroupResource
+    public function destroy(Group $group): ListGroupResource
     {
         $group->delete();
 
-        return GroupResource::make($group);
+        return ListGroupResource::make($group);
     }
 }
